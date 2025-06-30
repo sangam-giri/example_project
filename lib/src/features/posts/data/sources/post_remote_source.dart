@@ -8,20 +8,13 @@ class PostRemoteSource {
 
   final ApiClient _apiClient;
 
-  fetchPost() async {
+  Future<Either<String, List<PostModel>>> fetchPost() async {
     final response = await _apiClient.get(ApiEndpoints.posts);
-    response.fold(
-      (error) {
-        return Left(error);
-      },
-      (result) {
-        final List<PostModel> postModelList =
-            (result as List<dynamic>)
-                .map((e) => PostModel.fromJson(e))
-                .toList();
+    return response.fold((error) => Left(error), (result) {
+      final List<PostModel> postModelList =
+          (result as List<dynamic>).map((e) => PostModel.fromJson(e)).toList();
 
-        return Right(postModelList);
-      },
-    );
+      return Right(postModelList);
+    });
   }
 }

@@ -3,6 +3,7 @@ import 'package:example/src/features/posts/data/repo_impl/post_repo_impl.dart';
 import 'package:example/src/features/posts/data/sources/post_remote_source.dart';
 import 'package:example/src/features/posts/domain/repo/posts_repo.dart';
 import 'package:example/src/features/posts/domain/usecases/posts_usecase.dart';
+import 'package:example/src/features/posts/presentation/blocs/posts_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 /// Service Locator
@@ -33,4 +34,6 @@ void _usecases() {
   sl.registerLazySingleton<PostUsecase>(() => PostUsecase(sl()));
 }
 
-void _blocs() {}
+void _blocs() {
+  sl.registerFactory<PostsBloc>(() => PostsBloc(sl()));
+}

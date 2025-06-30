@@ -7,7 +7,7 @@ class PostUsecase {
 
   final PostRepository _postRepository;
 
-  Future<Either<String, List<PostModel>>> fetchPost() {
-    return _postRepository.fetchPosts();
+  Future<Either<String, List<PostModel>>> fetchPost() async {
+    return await _postRepository.fetchPosts();
   }
 }
